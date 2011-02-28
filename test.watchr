@@ -3,14 +3,10 @@ system 'clear'
 
 def growl(message)
   growlnotify = `which growlnotify`.chomp
-  if not growlnotify.empty?
-    title = "Watchr Test Results"
-    image = message.include?('0 failures, 0 errors') ? "~/.watchr_images/passed.png" : "~/.watchr_images/failed.png"
-    options = "-w -n Watchr --image '#{File.expand_path(image)}' -m '#{message}' '#{title}'"
-    system %(#{growlnotify} #{options} &)
-  else
-    puts message
-  end
+  title = "Watchr Test Results"
+  image = message.include?('0 failures, 0 errors') ? "~/.watchr_images/passed.png" : "~/.watchr_images/failed.png"
+  options = "-w -n Watchr --image '#{File.expand_path(image)}' -m '#{message}' '#{title}'"
+  system %(#{growlnotify} #{options} &)
 end
 
 def run(cmd)
